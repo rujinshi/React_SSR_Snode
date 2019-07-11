@@ -40,7 +40,7 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
 
 if (isDev) {
   clientWebpackConfig.entry = {
-    app: ["@babel/polyfill", path.join(__dirname, "../client/client-entry.js")]
+    app: path.join(__dirname, "../client/client-entry.js")
   };
   clientWebpackConfig.devServer = {
     // 本机所有IP地址
@@ -54,7 +54,7 @@ if (isDev) {
     overlay: {
       errors: true
     },
-    publicPath: "/public/",
+    publicPath: "/public",
     historyApiFallback: {
       index: "/public/index.html"
     }

@@ -1,13 +1,12 @@
 /**
- * @description 跟组件
+ * @description 根组件
  */
 import React, { PureComponent } from "react";
 class App extends PureComponent {
   render() {
     return (
       <div>
-        This is react Components ao jr 日本山梨县富士山河口湖 神奈川县横滨市
-        东京都 东京市
+        上海市奉贤区海泉路
       </div>
     );
   }
