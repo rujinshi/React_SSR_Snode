@@ -6,8 +6,8 @@
     "clean": "rimraf dist",
     "build:client": "webpack --config build/webpack.config.client.js",
     "build:server": "webpack --config build/webpack.config.server.js",
-    "dev:client": " webpack-dev-server --config build/webpack.config.client.js",
-    "dev:server": " babel-node server/server.js",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "dev:server": "cross-env NODE_ENV=development babel-node server/server.js",
     "build": "yarn run clean && yarn run build:client && yarn run build:server"
   },
   "license": "MIT",

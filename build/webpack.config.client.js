@@ -7,7 +7,7 @@ const merge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.config.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// 定义开发模式
+// 判断开发模式
 let isDev = process.env.NODE_ENV === "development";
 const clientWebpackConfig = merge(baseWebpackConfig, {
   entry: {
@@ -38,29 +38,29 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
   ]
 });
 
-// if (isDev) {
-//   clientWebpackConfig.entry = {
-//     app: ["@babel/polyfill", path.join(__dirname, "../client/client-entry.js")]
-//   };
-//   clientWebpackConfig.devServer = {
-//     // 本机所有IP地址
-//     host: "0.0.0.0",
-//     port: "8888",
-//     // Tell the server where to serve content from
-//     contentBase: path.join(__dirname, "../dist"),
-//     // 开启模块热替换
-//     hot: true,
-//     // 全屏错误提示
-//     overlay: {
-//       errors: true
-//     },
-//     publicPath: "/public/",
-//     historyApiFallback: {
-//       index: "/public/index.html"
-//     }
-//   };
-//   // HMR
-//   clientWebpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-// }
+if (isDev) {
+  clientWebpackConfig.entry = {
+    app: ["@babel/polyfill", path.join(__dirname, "../client/client-entry.js")]
+  };
+  clientWebpackConfig.devServer = {
+    // 本机所有IP地址
+    host: "0.0.0.0",
+    port: "8888",
+    // Tell the server where to serve content from
+    contentBase: path.join(__dirname, "../dist"),
+    // 开启模块热替换
+    hot: true,
+    // 全屏错误提示
+    overlay: {
+      errors: true
+    },
+    publicPath: "/public/",
+    historyApiFallback: {
+      index: "/public/index.html"
+    }
+  };
+  // HMR
+  clientWebpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 
 module.exports = clientWebpackConfig;
