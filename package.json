@@ -1,0 +1,40 @@
+{
+  "name": "react-tech",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:client": "webpack --config build/webpack.config.client.js",
+    "build:server": "webpack --config build/webpack.config.server.js",
+    "dev:client": " webpack-dev-server --config build/webpack.config.client.js",
+    "dev:server": " babel-node server/server.js",
+    "build": "yarn run clean && yarn run build:client && yarn run build:server"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.35.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/node": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@hot-loader/react-dom": "^16.8.6",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "memory-fs": "^0.4.1",
+    "react-hot-loader": "^4.12.6",
+    "rimraf": "^2.6.3",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  }
+}
