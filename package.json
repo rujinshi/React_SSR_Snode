@@ -20,9 +20,9 @@
     "webpack": "^4.35.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.0",
+    "@babel/core": "^7.5.4",
     "@babel/node": "^7.5.0",
-    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@hot-loader/react-dom": "^16.8.6",

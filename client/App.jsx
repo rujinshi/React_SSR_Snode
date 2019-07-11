@@ -6,13 +6,10 @@ class App extends PureComponent {
   render() {
     return (
       <div>
-        This is react Components ao 杀人诛心 jr
-        日本山梨县富士山河口湖
-        神奈川县横滨市
-        东京都
-        东京市
+        This is react Components ao jr 日本山梨县富士山河口湖 神奈川县横滨市
+        东京都 东京市
       </div>
-    )
+    );
   }
 }
 

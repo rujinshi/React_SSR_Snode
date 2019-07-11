@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.5.0":
+"@babel/core@^7.5.4":
   version "7.5.4"
   resolved "https://registry.npm.taobao.org/@babel/core/download/@babel/core-7.5.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fcore%2Fdownload%2F%40babel%2Fcore-7.5.4.tgz#4c32df7ad5a58e9ea27ad025c11276324e0b4ddd"
   integrity sha1-TDLfetWljp6ietAlwRJ2Mk4LTd0=
@@ -644,7 +644,7 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
 
-"@babel/preset-env@^7.5.0":
+"@babel/preset-env@^7.5.4":
   version "7.5.4"
   resolved "https://registry.npm.taobao.org/@babel/preset-env/download/@babel/preset-env-7.5.4.tgz#64bc15041a3cbb0798930319917e70fcca57713d"
   integrity sha1-ZLwVBBo8uweYkwMZkX5w/MpXcT0=
