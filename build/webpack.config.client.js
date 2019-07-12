@@ -12,7 +12,7 @@ let isDev = process.env.NODE_ENV === "development";
 const clientWebpackConfig = merge(baseWebpackConfig, {
   mode: "production",
   entry: {
-    app: ["@babel/polyfill", path.join(__dirname, "../client/client-entry.js")]
+    app: ["@babel/polyfill", path.join(__dirname, "../client/app.js")]
   },
   output: {
     path: path.join(__dirname, "../dist"),
@@ -42,7 +42,7 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
 if (isDev) {
   clientWebpackConfig.mode = "development";
   clientWebpackConfig.entry = {
-    app: path.join(__dirname, "../client/client-entry.js")
+    app: path.join(__dirname, "../client/app.js")
   };
   clientWebpackConfig.devServer = {
     // 本网络中的本机
