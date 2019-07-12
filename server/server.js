@@ -4,10 +4,13 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const favicon = require("serve-favicon");
 var ReactSSR = require("react-dom/server");
 const app = express();
 // 判断开发环境
 let isDev = process.env.NODE_ENV === "development";
+
+app.use(favicon(path.join(__dirname, "../favicon.ico")));
 
 // 生产模式
 if (!isDev) {
