@@ -1,7 +1,6 @@
 /**
  * @description 客户端打包入口
  */
-// import { hot } from "react-hot-loader/root";
 import { AppContainer } from "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -9,9 +8,6 @@ import App from "./App";
 // hot(App);
 
 const rootHtml = document.getElementById("root");
-// const render = Component => {
-//   ReactDOM.render(<Component />, rootHtml);
-// };
 
 const render = Component => {
   ReactDOM.render(
