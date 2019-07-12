@@ -4,8 +4,10 @@ const path = require("path");
 const MemoryFS = require("memory-fs");
 const serverConfig = require("../../build/webpack.config.server");
 var ReactSSR = require("react-dom/server");
+var proxy = require("http-proxy-middleware");
 
-// 读取打包后的inddex.html文件模板  因为 webpack dev server打包后的文件存在内存中
+// 读取打包后的inddex.html文件模板
+// 因为 webpack dev server打包后的文件存在内存中 不好直接获取
 const getTemplate = () => {
   return new Promise((resolve, reject) => {
     axios
@@ -26,7 +28,7 @@ serverCompiler.outputFileSystem = fs;
 
 let serverBundle;
 
-// 监视服务端打包入口文件
+// 监听服务端打包入口文件
 serverCompiler.watch({}, (err, stats) => {
   // error handle
   if (err) {
@@ -49,19 +51,29 @@ serverCompiler.watch({}, (err, stats) => {
     serverConfig.output.path,
     serverConfig.output.filename
   );
-  // 读出来的 bundle 是 string 并不是可以直接使用的模块内容
+  // 读出来的 bundle 是 string 并不是可以直接使用的模块内容 注意编码格式
   const bundle = fs.readFileSync(bundlePath, "utf-8");
   const m = new module.constructor();
   // 实例化一个module调用_compile方法
-  // 第一个参数是javascript代码，第二个自定义的名称
+  // 第一个参数是javascript代码，第二个文件名
   m._compile(bundle, "server-entry.js");
   serverBundle = m.exports.default;
 });
 
 module.exports = app => {
+  // 将 /public 的请求 代理到 webpack dev server 启动的服务上
+  // http://localhost:3001/public/app.ae1167ed.js  -> http://localhost:8888/public/app.ae1167ed.js
+  app.use(
+    "/public",
+    proxy({
+      target: "http://localhost:8888"
+    })
+  );
+
   app.get("*", (req, res) => {
     getTemplate().then(template => {
       const content = ReactSSR.renderToString(serverBundle);
+      // 替换 content
       const htmlString = template.replace(
         "<!--react-ssr-outlet-->",
         `${content}`

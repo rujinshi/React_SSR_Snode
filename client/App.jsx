@@ -7,6 +7,7 @@ class App extends PureComponent {
     return (
       <div>
         上海市奉贤区海泉路
+        海湾旅游区
       </div>
     );
   }

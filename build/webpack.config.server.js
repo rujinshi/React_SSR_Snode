@@ -4,7 +4,9 @@
 const path = require("path");
 const merge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.config.base");
+let isDev = process.env.NODE_ENV === "development";
 const serverWebpackConfig = merge(baseWebpackConfig, {
+  mode: "production",
   target: "node", //指定node运行环境
   // 服务端打包入口
   entry: {
@@ -28,5 +30,9 @@ const serverWebpackConfig = merge(baseWebpackConfig, {
     ]
   }
 });
+
+if (isDev) {
+  serverWebpackConfig.mode = "development";
+}
 
 module.exports = serverWebpackConfig;

@@ -10,6 +10,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // 判断开发模式
 let isDev = process.env.NODE_ENV === "development";
 const clientWebpackConfig = merge(baseWebpackConfig, {
+  mode: "production",
   entry: {
     app: ["@babel/polyfill", path.join(__dirname, "../client/client-entry.js")]
   },
@@ -39,11 +40,12 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
 });
 
 if (isDev) {
+  clientWebpackConfig.mode = "development";
   clientWebpackConfig.entry = {
     app: path.join(__dirname, "../client/client-entry.js")
   };
   clientWebpackConfig.devServer = {
-    // 本机所有IP地址
+    // 本网络中的本机
     host: "0.0.0.0",
     port: "8888",
     // Tell the server where to serve content from
@@ -54,7 +56,7 @@ if (isDev) {
     overlay: {
       errors: true
     },
-    publicPath: "/public",
+    publicPath: "/public/",
     historyApiFallback: {
       index: "/public/index.html"
     }

@@ -6,10 +6,10 @@ const fs = require("fs");
 const path = require("path");
 var ReactSSR = require("react-dom/server");
 const app = express();
-
+// 判断开发环境
 let isDev = process.env.NODE_ENV === "development";
 
-// 生成模式
+// 生产模式
 if (!isDev) {
   const serverEntry = require("../client/server-entry.js").default;
   // 同步读取打包后的 index.html 模板
