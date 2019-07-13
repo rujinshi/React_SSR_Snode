@@ -4,21 +4,36 @@
 import { AppContainer } from "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "mobx-react";
+import { BrowserRouter } from "react-router-dom";
 import App from "./views/App";
+import appState from "./store/app-state";
 
-const rootHtml = document.getElementById("root");
+const root = document.getElementById("root");
 
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <Router>
-        <Component />
-      </Router>
+      <Provider appState={appState}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
     </AppContainer>,
-    rootHtml
+    root
   );
 };
+
+// const render = Component => {
+//   ReactDOM.render(
+//     <AppContainer>
+//       <Provider appState={appState}>
+//         <Component />
+//       </Provider>
+//     </AppContainer>,
+//     rootHtml
+//   );
+// };
 
 render(App);
 

@@ -41,9 +41,10 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
 
 if (isDev) {
   clientWebpackConfig.mode = "development";
-  clientWebpackConfig.entry = {
-    app: path.join(__dirname, "../client/app.js")
-  };
+  (clientWebpackConfig.devtool = "cheap-module-eval-source-map"),
+    (clientWebpackConfig.entry = {
+      app: path.join(__dirname, "../client/app.js")
+    });
   clientWebpackConfig.devServer = {
     // 本网络中的本机
     host: "0.0.0.0",
@@ -59,6 +60,10 @@ if (isDev) {
     publicPath: "/public/",
     historyApiFallback: {
       index: "/public/index.html"
+    },
+    // 客户端请求代理到服务端
+    proxy: {
+      "/api": "http://localhost:3001"
     }
   };
   // HMR
