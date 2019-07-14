@@ -53,6 +53,7 @@ if (isDev) {
     contentBase: path.join(__dirname, "../dist"),
     // 开启模块热替换
     hot: true,
+    disableHostCheck: true,
     // 全屏错误提示
     overlay: {
       errors: true

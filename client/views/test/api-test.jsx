@@ -17,6 +17,7 @@ export default class TestApi extends PureComponent {
       });
   }
 
+  // 登录
   login() {
     axios
       .post("/api/user/login", {
@@ -30,6 +31,7 @@ export default class TestApi extends PureComponent {
       });
   }
 
+  // 标记全部已读
   markAll() {
     axios
       .post("/api/message/mark_all?needAccessToken=true")

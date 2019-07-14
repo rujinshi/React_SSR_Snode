@@ -14,24 +14,27 @@ let isDev = process.env.NODE_ENV === "development";
 
 const app = express();
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// 设置 session
+// Use the session middleware
 app.use(
   session({
-    maxAge: 10 * 60 * 1000,
     name: "tid",
+    // 是否每次都重新保存会话
     resave: false,
     saveUninitialized: false,
-    secret: "react cnode class"
+    secret: "yuchunjiao#react",
+    cookie: {
+      maxAge: 10 * 60 * 1000
+    }
   })
 );
 
 app.use(favicon(path.join(__dirname, "../favicon.ico")));
-// 登录接口 和 一般请求接口
+// 登录接口 和 其他请求接口 中间件入口
 app.use("/api/user", require("./util/handle-login"));
 app.use("/api", require("./util/proxy"));
 

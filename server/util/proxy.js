@@ -3,15 +3,15 @@
  */
 const axios = require("axios");
 const queryString = require("query-string");
-const baseUrl = "http://cnodejs.org/api/v1";
+const baseUrl = "https://cnodejs.org/api/v1";
 
 module.exports = (req, res, next) => {
   const path = req.path;
   // 获取session中suer信息
-  const user = req.session.user || {};
-  const needAccessToken = req.query.needAccessToken;
+  const { user: { accessToken } = {} } = req.session;
+  const { needAccessToken = false } = req.query;
 
-  if (needAccessToken && !user.needAccessToken) {
+  if (needAccessToken && !accessToken) {
     res.status(401).send({
       success: false,
       msg: "need login"
@@ -19,7 +19,10 @@ module.exports = (req, res, next) => {
   }
 
   // 准备好干净的 query
-  const query = Object.assign({}, req.query);
+  const query = Object.assign({}, req.query, {
+    // 如果 get 请求需要 accesstoken
+    accesstoken: needAccessToken && req.method === "GET" ? accessToken : ""
+  });
   if (query.needAccessToken) delete query.needAccessToken;
 
   axios(`${baseUrl}${path}`, {
@@ -27,7 +30,8 @@ module.exports = (req, res, next) => {
     params: query,
     data: queryString.stringify(
       Object.assign({}, req.body, {
-        accesstoken: user.accessToken
+        // 如果 post 请求中需要 accesstoken
+        accesstoken: needAccessToken && req.method === "POST" ? accessToken : ""
       })
     ),
     headers: {

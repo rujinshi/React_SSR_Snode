@@ -1,12 +1,13 @@
 /**
- * @description 登录接口
+ * @description 登录中间件
  */
 const router = require("express").Router();
 const axios = require("axios");
 
-const baseUrl = "https://cnodejs.org/api/v1 ";
+// 一个空格引发的惨案
+const baseUrl = "https://cnodejs.org/api/v1";
 
-router.post("/login", (req, res, next) => {
+router.post("/login", function(req, res, next) {
   axios
     .post(`${baseUrl}/accesstoken`, {
       accesstoken: req.body.accessToken
