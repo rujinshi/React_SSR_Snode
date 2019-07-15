@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
-import { AppState } from "../../store/app-state";
+// import { AppState } from "../../store/app-state";
 
 @inject("appState")
 @observer
@@ -9,6 +9,15 @@ export default class TopicList extends PureComponent {
   constructor() {
     super();
     this.changeName = this.changeName.bind(this);
+  }
+
+  asyncBootstrap() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.props.appState.count = 3;
+        resolve(true);
+      });
+    });
   }
 
   changeName(event) {
@@ -26,7 +35,3 @@ export default class TopicList extends PureComponent {
     );
   }
 }
-
-TopicList.propTypes = {
-  appState: PropTypes.instanceOf(AppState)
-};

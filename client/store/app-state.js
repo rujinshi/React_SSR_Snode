@@ -1,8 +1,13 @@
 import { observable, computed, autorun, action } from "mobx";
 
-export class AppState {
-  @observable count = 0;
-  @observable name = "jack";
+export default class AppState {
+  constructor({ count, name } = { count: 0, name: "zhangzhiming" }) {
+    this.count = count;
+    this.name = name;
+  }
+
+  @observable count;
+  @observable name;
   @computed get msg() {
     return `${this.name} say count is ${this.count}`;
   }
@@ -13,8 +18,11 @@ export class AppState {
   @action changeName(name) {
     this.name = name;
   }
+
+  toJson() {
+    return {
+      count: this.count,
+      name: this.name
+    };
+  }
 }
-
-const appState = new AppState();
-
-export default appState;

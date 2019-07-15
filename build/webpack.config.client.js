@@ -28,6 +28,16 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.ejs$/,
+        loader: "compile-ejs-loader",
+        options: {
+          htmlmin: true,
+          htmlminOptions: {
+            removeComments: true
+          }
+        }
       }
     ]
   },
@@ -35,6 +45,11 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../client/template.html")
+    }),
+    // 服务端ejs模板
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "../client/server.template.ejs"),
+      filename: "server.ejs"
     })
   ]
 });

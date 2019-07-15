@@ -15,7 +15,6 @@ class App extends PureComponent {
         <Routes key="routes" />
       </div>
     );
-    // return <Fragment>上海市奉贤区海泉路100号</Fragment>;
   }
 }
 
