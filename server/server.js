@@ -8,6 +8,7 @@ const favicon = require("serve-favicon");
 var ReactSSR = require("react-dom/server");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const serverRender = require("./util/server-render");
 
 // 判断开发环境
 let isDev = process.env.NODE_ENV === "development";
@@ -40,22 +41,17 @@ app.use("/api", require("./util/proxy"));
 
 // 生产模式
 if (!isDev) {
-  const serverEntry = require("../client/server-entry.js").default;
-  // 同步读取打包后的 index.html 模板
+  const serverEntry = require("../client/server-entry.js");
+  // 同步读取打包后的 server.ejs 模板
   const template = fs.readFileSync(
-    path.join(__dirname, "../dist/index.html"),
+    path.join(__dirname, "../dist/server.ejs"),
     "utf8"
   );
   // 映射静态资源到 dist 路径下
   app.use("/public", express.static(path.join(__dirname, "../dist")));
 
-  app.get("*", (req, res) => {
-    const serverEntryString = ReactSSR.renderToString(serverEntry);
-    const htmlString = template.replace(
-      "<!--react-ssr-outlet-->",
-      `${serverEntryString}`
-    );
-    res.send(htmlString);
+  app.get("*", (req, res, next) => {
+    serverRender(serverEntry, template, req, res).catch(next);
   });
 } else {
   // 开发模式
@@ -63,6 +59,12 @@ if (!isDev) {
   devStatic(app);
 }
 
+// 错误处理
+app.use((error, req, res, next) => {
+  console.log("server error is", error);
+  res.status(500).send(error);
+});
+
 app.listen(3001, () => {
-  console.log("server is listening on 3001");
+  console.log(" 🚀 服务又又又起来了 server is listening on 3001 端口");
 });

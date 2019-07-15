@@ -8,7 +8,8 @@
 		"build:server": "webpack --config build/webpack.config.server.js",
 		"dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
 		"dev:server": "nodemon server/server.js",
-		"build": "yarn run clean && yarn run build:client && yarn run build:server"
+		"build": "yarn run clean && yarn run build:client && yarn run build:server",
+		"start": "cross-env NODE_ENV=production babel-node server/server.js"
 	},
 	"license": "MIT",
 	"dependencies": {
@@ -26,6 +27,7 @@
 		"react": "^16.8.6",
 		"react-async-bootstrapper": "^2.1.1",
 		"react-dom": "^16.8.6",
+		"react-helmet": "^5.2.1",
 		"react-hot-loader": "^4.12.6",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1",

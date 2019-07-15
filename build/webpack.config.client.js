@@ -23,13 +23,6 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      },
-      {
         test: /\.ejs$/,
         loader: "compile-ejs-loader",
         options: {
@@ -46,7 +39,7 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../client/template.html")
     }),
-    // 服务端ejs模板
+    // 服务端 ejs 模板
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "../client/server.template.ejs"),
       filename: "server.ejs"

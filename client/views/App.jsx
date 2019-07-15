@@ -1,20 +1,27 @@
 /**
  * @description 根组件
  */
-import React, { PureComponent } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import Routes from "../config/router";
+import Routers from "../config/router";
 
-class App extends PureComponent {
+class App extends React.Component {
   render() {
-    return (
+    // return [
+    //   <div key="banner">
+    //     <div>初次见面</div>
+    //     <Link to="/">列表页</Link>
+    //     <br />
+    //     <Link to="/detail">详情页</Link>
+    //     <br />
+    //   </div>,
+    //   <Routers key="routes" />
+    // ];
+    return [
       <div key="banner">
-        <Link to="/"> 首页</Link>
-        <br />
-        <Link to="/detail">详情页</Link>
-        <Routes key="routes" />
+        <div>初次见面</div>
       </div>
-    );
+    ];
   }
 }
 

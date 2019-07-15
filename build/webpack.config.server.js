@@ -18,17 +18,9 @@ const serverWebpackConfig = merge(baseWebpackConfig, {
     filename: "server-entry.js",
     libraryTarget: "commonjs2" //打包成commonjs2规范
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      }
-    ]
-  }
+  // package.json 中的依赖项不进行打包 ，
+  // 运行时(runtime)再去从外部获取这些扩展依赖
+  externals: Object.keys(require("../package.json").dependencies)
 });
 
 if (isDev) {

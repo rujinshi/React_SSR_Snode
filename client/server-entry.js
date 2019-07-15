@@ -11,6 +11,7 @@ import { createStoreMap } from "./store/store";
 // 避免mobx服务端渲染的内存泄漏问题
 useStaticRendering(true);
 
+//  传入对象格式：{appStore: xxx}
 export default (stores, routerContext, url) => (
   <Provider {...stores}>
     <StaticRouter context={routerContext} location={url}>
