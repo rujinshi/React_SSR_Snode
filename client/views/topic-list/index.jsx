@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 // import { AppState } from "../../store/app-state";
+import { Button } from "@material-ui/core";
 
 @inject("appState")
 @observer
@@ -34,6 +35,9 @@ export default class TopicList extends PureComponent {
         </Helmet>
         <input type="text" onChange={this.changeName} />
         <span>{appState.msg}</span>
+        <Button variant="contained" color="primary">
+          不...不要点我...
+        </Button>
       </div>
     );
   }

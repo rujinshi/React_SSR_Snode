@@ -8,17 +8,52 @@ import { Provider } from "mobx-react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./views/App";
 import AppState from "./store/app-state";
+// 导入主题和颜色
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { lightBlue, pink } from "@material-ui/core/colors";
+
 // 获取服务端模板传来的 __INITIAL__STATE__
 const initialState = window.__INITIAL__STATE__ || {};
+
+const theme = createMuiTheme({
+  palette: {
+    primary: lightBlue,
+    accent: pink,
+    type: "light"
+  },
+  typography: {
+    useNextVariants: true
+  }
+});
+
+const createApp = TheApp => {
+  class Main extends React.Component {
+    componentDidMount() {
+      const jssStyles = document.getElementById("jss-server-side");
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
+      }
+    }
+
+    render() {
+      return <TheApp />;
+    }
+  }
+
+  return Main;
+};
 
 const root = document.getElementById("root");
 
 const render = Component => {
+  const ComponentR = createApp(Component);
   ReactDOM.render(
     <AppContainer>
       <Provider appState={new AppState(initialState.appState)}>
         <BrowserRouter>
-          <Component />
+          <MuiThemeProvider theme={theme}>
+            <ComponentR />
+          </MuiThemeProvider>
         </BrowserRouter>
       </Provider>
     </AppContainer>,
