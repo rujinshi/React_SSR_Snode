@@ -48,7 +48,7 @@ class MainAppBar extends React.Component {
               <HomeIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
-              JNode
+              SNode
             </Typography>
             <Button
               raised="true"

@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 import { BrowserRouter } from "react-router-dom";
 import App from "./views/App";
-import AppState from "./store/app-state";
+import { AppState, TopicStore } from "./store/store";
 // 导入主题和颜色
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { lightBlue, pink } from "@material-ui/core/colors";
@@ -43,13 +43,15 @@ const createApp = TheApp => {
   return Main;
 };
 
+const appState = new AppState(initialState.appState);
+const topicStore = new TopicStore(initialState.topicStore);
 const root = document.getElementById("root");
 
 const render = Component => {
   const ComponentR = createApp(Component);
   ReactDOM.render(
     <AppContainer>
-      <Provider appState={new AppState(initialState.appState)}>
+      <Provider appState={appState} topicStore={topicStore}>
         <BrowserRouter>
           <MuiThemeProvider theme={theme}>
             <ComponentR />

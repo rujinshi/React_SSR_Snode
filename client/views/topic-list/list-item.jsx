@@ -9,7 +9,6 @@ import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";
 import { topicPrimaryStyle, topicSecondaryStyle } from "./styles";
 import cx from "classnames";
-import IconHome from "@material-ui/icons/Home";
 
 import { tabs } from "../../util/variable-define";
 
@@ -29,9 +28,9 @@ const Primary = ({ classes, topic }) => {
 
 const Secondary = ({ classes, topic }) => (
   <span className={classes.root}>
-    <span className={classes.userName}>{topic.loginname}</span>
+    <span className={classes.userName}>{topic.author.loginname}</span>
     <span className={classes.count}>
-      <span className={classes.accentColor}>{topic.replay_count}</span>
+      <span className={classes.accentColor}>{topic.reply_count}</span>
       <span>/</span>
       <span>{topic.visit_count}</span>
     </span>
@@ -49,10 +48,9 @@ const TopicListItem = ({ onClick, topic }) => {
   return (
     <ListItem button onClick={onClick}>
       <ListItemAvatar>
-        {/* <Avatar
-        src={topic.author.avatar_url}
-        />*/}
-        <IconHome />
+        <Avatar
+          src={topic.author.avatar_url}
+        />
       </ListItemAvatar>
       <ListItemText
         primary={<StyledPrimary topic={topic} />}
