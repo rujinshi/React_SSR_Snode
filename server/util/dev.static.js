@@ -43,7 +43,7 @@ const serverCompiler = webpack(serverConfig);
 // write files to memory instead of to disk
 serverCompiler.outputFileSystem = fs;
 
-let serverBundle, createStoreMap;
+let serverBundle;
 
 // 监听 服务端webpack配置的变化
 serverCompiler.watch({}, (err, stats) => {

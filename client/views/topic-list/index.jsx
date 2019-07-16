@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 // import { AppState } from "../../store/app-state";
@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 
 @inject("appState")
 @observer
-export default class TopicList extends PureComponent {
+export default class TopicList extends React.Component {
   constructor() {
     super();
     this.changeName = this.changeName.bind(this);

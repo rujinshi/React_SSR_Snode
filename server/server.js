@@ -5,7 +5,6 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const favicon = require("serve-favicon");
-var ReactSSR = require("react-dom/server");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const serverRender = require("./util/server-render");

@@ -72,6 +72,7 @@ module.exports = (bundle, template, req, res) => {
           link: helmet.link.toString(),
           materialCss: sheetRegistry.toString()
         });
+        console.log("服务端渲染后的 content:" + content);
         res.send(html);
         resolve();
       })

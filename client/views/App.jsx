@@ -9,7 +9,7 @@ class App extends React.Component {
   render() {
     return [
       <div key="banner">
-        <div>初次见面</div>
+        <div>test banner</div>
         <Link to="/">列表页</Link>
         <br />
         <Link to="/detail">详情页</Link>
@@ -17,11 +17,6 @@ class App extends React.Component {
       </div>,
       <Routers key="routes" />
     ];
-    // return [
-    //   <div key="banner">
-    //     <div>初次见面</div>
-    //   </div>
-    // ];
   }
 }
 
