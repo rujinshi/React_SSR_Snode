@@ -49,16 +49,16 @@ const clientWebpackConfig = merge(baseWebpackConfig, {
 
 if (isDev) {
   clientWebpackConfig.mode = "development";
-  (clientWebpackConfig.devtool = "cheap-module-eval-source-map"),
-    (clientWebpackConfig.entry = {
-      app: path.join(__dirname, "../client/app.js")
-    });
+  clientWebpackConfig.devtool = "cheap-module-eval-source-map";
+  clientWebpackConfig.entry = {
+    app: path.join(__dirname, "../client/app.js")
+  };
   clientWebpackConfig.devServer = {
     // 本网络中的本机
     host: "0.0.0.0",
     port: "8888",
     // Tell the server where to serve content from
-    contentBase: path.join(__dirname, "../dist"),
+    // contentBase: path.join(__dirname, "../dist"),
     // 开启模块热替换
     hot: true,
     disableHostCheck: true,
