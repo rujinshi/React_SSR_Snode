@@ -2,7 +2,7 @@ export const tabs = {
   share: "分享",
   job: "工作",
   ask: "问答",
-  good: "精品",
+  good: "精华",
   dev: "测试",
   all: "全部"
 };

@@ -26,6 +26,7 @@ const Primary = ({ classes, topic }) => {
   );
 };
 
+const StyledPrimary = withStyles(topicPrimaryStyle)(Primary);
 const Secondary = ({ classes, topic }) => (
   <span className={classes.root}>
     <span className={classes.userName}>{topic.author.loginname}</span>
@@ -41,7 +42,6 @@ const Secondary = ({ classes, topic }) => (
   </span>
 );
 
-const StyledPrimary = withStyles(topicPrimaryStyle)(Primary);
 const StyledSecondary = withStyles(topicSecondaryStyle)(Secondary);
 
 const TopicListItem = ({ onClick, topic }) => {

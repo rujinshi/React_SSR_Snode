@@ -65,13 +65,14 @@ class TopicStore {
     this.topics.push(new Topic(createTopic(topic)));
   }
 
-  // 获取话题列表
-  @action fetchTopics() {
+  // 根据 tab 获取列表
+  @action fetchTopics(tab) {
     return new Promise((resolve, reject) => {
       this.syncing = true;
       this.topics = []; //清除缓存
       get("/topics", {
-        mdrender: false // 不渲染 markdown 格式文本
+        mdrender: false, // 不渲染 markdown 格式文本
+        tab //列表页
       })
         .then(resp => {
           if (resp.success) {
