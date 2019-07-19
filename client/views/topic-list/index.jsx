@@ -1,22 +1,22 @@
-import React from "react"
-import { observer, inject } from "mobx-react"
-import Helmet from "react-helmet"
-import Container from "../layout/container"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
-import List from "@material-ui/core/List"
-import TopicListItem from "./list-item"
+import React from "react";
+import { observer, inject } from "mobx-react";
+import Helmet from "react-helmet";
+import Container from "../layout/container";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import List from "@material-ui/core/List";
+import TopicListItem from "./list-item";
 // loading组件
-import CircularProgress from '@material-ui/core/CircularProgress'
-import queryString from 'query-string'
-import { tabs } from '../../util/variable-define'
+import CircularProgress from "@material-ui/core/CircularProgress";
+import queryString from "query-string";
+import { tabs } from "../../util/variable-define";
 
 // 获取从 app.js 的 Provider上提供的 store   赋给props
-@inject((stores) => {
+@inject(stores => {
   return {
     appState: stores.appState,
-    topicStore: stores.topicStore,
-  }
+    topicStore: stores.topicStore
+  };
 })
 @observer
 export default class TopicList extends React.Component {
@@ -32,7 +32,7 @@ export default class TopicList extends React.Component {
   componentDidMount() {
     const tab = this.getTab();
     // 根据不同的 tab 获取相应数据
-    this.props.topicStore.fetchTopics(tab)
+    this.props.topicStore.fetchTopics(tab);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -48,12 +48,20 @@ export default class TopicList extends React.Component {
     return query.tab || "all";
   }
 
-  bootstrap() {
+  asyncBootstrap() {
     console.log("执行bootstrap方法");
-    return new Promise(resolve => {
-      this.props.appState.count = 3;
-      resolve(true);
-    });
+    const tab = this.getTab();
+    console.log("tab is ", tab);
+    return this.props.topicStore
+      .fetchTopics(tab)
+      .then(data => {
+        console.log("bootstrap方法请求到的数据：", data);
+        return true;
+      })
+      .catch(err => {
+        console.log("asyncBootstrap err is ", err);
+        return false;
+      });
   }
 
   // 切换 tab 路由跳转
@@ -64,18 +72,17 @@ export default class TopicList extends React.Component {
     });
   }
 
-  listItemClick(e) {
-    console.log(this.state, e);
+  listItemClick(topic) {
+    this.props.history.push(`/detail/${topic.id}`);
   }
 
   render() {
-    const { topicStore } = this.props
-    const { tabIndex } = this.state
+    const { topicStore } = this.props;
     // 得到 topicList
-    const topicList = topicStore.topics
+    const topicList = topicStore.topics;
     // 异步请求标志位
-    const syncingTopics = topicStore.syncing
-    const tab = this.getTab()
+    const syncingTopics = topicStore.syncing;
+    const tab = this.getTab();
 
     return (
       <Container>
@@ -84,31 +91,32 @@ export default class TopicList extends React.Component {
           <meta name="description" content="This is description" />
         </Helmet>
         <Tabs value={tab} onChange={this.changeTab}>
-          {
-            Object.keys(tabs).map((t) => {
-              return <Tab key={t} label={tabs[t]} value={t} />
-            })
-          }
+          {Object.keys(tabs).map(t => {
+            return <Tab key={t} label={tabs[t]} value={t} />;
+          })}
         </Tabs>
         <List>
-          {
-            topicList.map(topic =>
-              <TopicListItem onClick={this.listItemClick} topic={topic} key={topic.id} />)
-          }
-        </List>
-        {
-          syncingTopics ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                padding: "10px 0"
+          {topicList.map(topic => (
+            <TopicListItem
+              onClick={() => {
+                this.listItemClick(topic);
               }}
-            >
-              <CircularProgress color="secondary" />
-            </div>
-          ) : null
-        }
+              topic={topic}
+              key={topic.id}
+            />
+          ))}
+        </List>
+        {syncingTopics ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              padding: "10px 0"
+            }}
+          >
+            <CircularProgress color="secondary" />
+          </div>
+        ) : null}
       </Container>
     );
   }

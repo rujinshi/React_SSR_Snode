@@ -1,6 +1,7 @@
 const serialize = require("serialize-javascript");
 const ejs = require("ejs");
-const bootstrapper = require("react-async-bootstrapper");
+// const bootstrapper = require("react-async-bootstrapper");
+const asyncBootstrap = require("react-async-bootstrapper").default;
 
 const ReactSSR = require("react-dom/server");
 const Helmet = require("react-helmet").default;
@@ -22,11 +23,19 @@ const getStoreState = stores => {
 
 module.exports = (bundle, template, req, res) => {
   return new Promise((resolve, reject) => {
+    const user = req.session.user;
     const createStoreMap = bundle.createStoreMap;
     const createApp = bundle.default;
 
     const routerContext = {};
     const stores = createStoreMap();
+
+    console.log("当前user是：", user);
+    // 如果在服务端判断已有登录信息 直接改变state里的值
+    if (user) {
+      stores.appState.user.isLogin = true;
+      stores.appState.user.info = user;
+    }
 
     const sheetRegistry = new SheetsRegistry();
     const jss = create(preset());
@@ -48,7 +57,7 @@ module.exports = (bundle, template, req, res) => {
       theme,
       req.url
     );
-    bootstrapper(app)
+    asyncBootstrap(app)
       .then(() => {
         console.log("服务端的bootstrap开始运行");
         // 在服务端渲染做重定向

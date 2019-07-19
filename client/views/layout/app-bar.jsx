@@ -9,6 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import Typography from "@material-ui/core/Typography";
 
+import { inject, observer } from "mobx-react";
+
 const styles = {
   root: {
     width: "100%"
@@ -17,20 +19,20 @@ const styles = {
     flex: 1
   }
 };
-
+@inject(stores => {
+  return {
+    user: stores.appState.user
+  };
+})
+@observer
 class MainAppBar extends React.Component {
   constructor() {
     super();
     this.onHomeIconClick = this.onHomeIconClick.bind(this);
-    this.createButtonClick = this.createButtonClick.bind(this);
     this.loginButtonClick = this.loginButtonClick.bind(this);
   }
   onHomeIconClick() {
     this.props.history.push(`/list`);
-  }
-
-  createButtonClick() {
-    this.props.history.push(`/topic/create`);
   }
 
   loginButtonClick() {
@@ -39,7 +41,11 @@ class MainAppBar extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      user: { isLogin, info: { loginname } = {} } = {}
+    } = this.props;
+    const buttonText = isLogin ? loginname || "" : "登录";
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -50,15 +56,8 @@ class MainAppBar extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               SNode
             </Typography>
-            <Button
-              raised="true"
-              color="inherit"
-              onClick={this.createButtonClick}
-            >
-              新建话题
-            </Button>
             <Button color="inherit" onClick={this.loginButtonClick}>
-              登录
+              {buttonText}
             </Button>
           </ToolBar>
         </AppBar>
@@ -67,4 +66,4 @@ class MainAppBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(MainAppBar);
+export default withStyles(styles)(withRouter(MainAppBar));

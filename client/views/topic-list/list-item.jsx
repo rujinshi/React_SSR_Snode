@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { withStyles } from "@material-ui/core/styles";
 import { topicPrimaryStyle, topicSecondaryStyle } from "./styles";
 import cx from "classnames";
+import dateformat from 'dateformat'
 
 import { tabs } from "../../util/variable-define";
 
@@ -36,8 +37,7 @@ const Secondary = ({ classes, topic }) => (
       <span>{topic.visit_count}</span>
     </span>
     <span>
-      创建时间：
-      {topic.create_at}
+      {`创建时间:${dateformat(topic.create_at, 'yy年mm月dd日')}`}
     </span>
   </span>
 );

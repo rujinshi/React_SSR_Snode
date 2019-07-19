@@ -3,13 +3,12 @@ import axios from "axios";
 // 客户端时 为空字符串
 // /api/xxx 127.0.0.1
 const baseUrl = process.env.API_BASE || "";
+console.log("baseUrl is", baseUrl);
 
 const parseUrl = (url, params) => {
-  console.log("url is", url);
-  console.log("paramsparamsparams", params);
+  //params => {mdrender: false, tab: "all"}
   const str = Object.keys(params).reduce((result, key) => {
     result += `${key}=${params[key]}&`;
-    console.log("resultresultresult", result);
     return result;
   }, "");
   return `${baseUrl}/api${url}?${str.substr(0, str.length - 1)}`;

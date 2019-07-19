@@ -24,7 +24,7 @@ const serverWebpackConfig = merge(baseWebpackConfig, {
   externals: Object.keys(require("../package.json").dependencies),
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.API_BASE": '"http://127.0.0.1:8888"'
+      "process.env.API_BASE": '"http://127.0.0.1:3001"'
     })
   ]
 });

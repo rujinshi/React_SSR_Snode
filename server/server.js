@@ -27,9 +27,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: "yuchunjiao#react",
-    cookie: {
-      maxAge: 10 * 60 * 1000
-    }
+    maxAge: 10 * 60 * 1000
   })
 );
 
@@ -65,5 +63,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(3001, () => {
-  console.log(" 🚀 服务又又又起来了 server is listening on 3001 端口");
+  console.log(" 👏服务起来了 server is listening on 3001 端口");
 });
