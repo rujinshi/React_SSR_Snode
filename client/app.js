@@ -65,7 +65,7 @@ const render = Component => {
 
 render(App);
 
-// 模块热替换的 API
+// HMR 模块热替换的 API
 if (module.hot) {
   module.hot.accept("./views/App", () => {
     const nextApp = require("./views/App").default;

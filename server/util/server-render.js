@@ -67,6 +67,7 @@ module.exports = (bundle, template, req, res) => {
           return;
         }
         const helmet = Helmet.renderStatic();
+        // 获得 state
         const state = getStoreState(stores);
         // Render a React element to its initial HTML.
         const content = ReactSSR.renderToString(app);

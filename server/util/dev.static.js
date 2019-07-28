@@ -63,6 +63,7 @@ serverCompiler.watch({}, (err, stats) => {
   if (stats.hasWarnings()) {
     console.warn(info.warnings);
   }
+  
   // 获取服务端打包后 bundle 在内存中的路径
   const bundlePath = path.join(
     serverConfig.output.path,

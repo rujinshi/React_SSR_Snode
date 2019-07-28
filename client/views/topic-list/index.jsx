@@ -49,7 +49,7 @@ export default class TopicList extends React.Component {
   }
 
   asyncBootstrap() {
-    console.log("执行bootstrap方法");
+    console.log("执行异步bootstrap方法");
     const tab = this.getTab();
     console.log("tab is ", tab);
     return this.props.topicStore

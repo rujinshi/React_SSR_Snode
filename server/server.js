@@ -44,7 +44,7 @@ if (!isDev) {
     path.join(__dirname, "../dist/server.ejs"),
     "utf8"
   );
-  // 通过带有 /static 前缀地址来访问 dist 目录中的文件了
+  // 通过带有 /public 的虚拟路径前缀地址 来访问 dist 目录中的文件
   app.use("/public", express.static(path.join(__dirname, "../dist")));
 
   app.get("*", (req, res, next) => {
