@@ -1,9 +1,8 @@
 # React + express 服务端渲染 demo
 
-This is a react ssr demo. It base on react16.x and webpack4.x
+基于React SSR + Express 同构的仿Cnode社区
 
 ## 概况
-
 
 
 ## 项目收益
