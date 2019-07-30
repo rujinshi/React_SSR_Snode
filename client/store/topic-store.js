@@ -80,7 +80,6 @@ class TopicStore {
     return new Promise((resolve, reject) => {
       // 获取缓存数据
       if (this.detailsMap[topicID]) {
-        console.log("缓存话题数据", this.detailsMap[topicID]);
         resolve(this.detailsMap[topicID]);
       } else {
         get(`/topic/${topicID}`, {
@@ -88,7 +87,6 @@ class TopicStore {
         })
           .then(resp => {
             if (resp.success) {
-              console.log("resp.data is 话题详情", resp.data);
               this.details.push(new Topic(createTopic(resp.data), true));
               this.syncing = false;
               resolve();

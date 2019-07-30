@@ -164,7 +164,7 @@
 
 "@babel/helper-regex@^7.0.0", "@babel/helper-regex@^7.4.4":
   version "7.4.4"
-  resolved "https://registry.npm.taobao.org/@babel/helper-regex/download/@babel/helper-regex-7.4.4.tgz#a47e02bc91fb259d2e6727c2a30013e3ac13c4a2"
+  resolved "https://registry.npm.taobao.org/@babel/helper-regex/download/@babel/helper-regex-7.4.4.tgz#a47e02bc91fb259d2e6727c2a803e3ac13c4a2"
   integrity sha1-pH4CvJH7JZ0uZyfCowAT46wTxKI=
   dependencies:
     lodash "^4.17.11"

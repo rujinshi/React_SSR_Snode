@@ -62,6 +62,6 @@ app.use((error, req, res, next) => {
   res.status(500).send(error);
 });
 
-app.listen(3001, () => {
-  console.log(" 👏服务起来了 server is listening on 3001 端口");
+app.listen(80, () => {
+  console.log(" 👏 服务起来了 server is listening on 80 端口");
 });

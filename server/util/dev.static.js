@@ -86,7 +86,7 @@ serverCompiler.watch({}, (err, stats) => {
 
 module.exports = app => {
   // 将 /public 的请求 代理到 webpack dev server 启动的服务上
-  // http://localhost:3001/public/app.ae1167ed.js  -> http://localhost:8888/public/app.ae1167ed.js
+  // http://localhost:80/public/app.ae1167ed.js  -> http://localhost:8888/public/app.ae1167ed.js
   app.use(
     "/public",
     proxy({

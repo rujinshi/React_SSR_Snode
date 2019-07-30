@@ -1,13 +1,30 @@
-# React + express 服务端渲染 demo
+# React + express + Mobx 实现服务端渲染
 
-基于React SSR + Express 同构的仿Cnode社区
+1.使用Express实现同构，Mobx进行数据流管理。
 
-## 概况
+2.使用 Promise 封装多个路由中间件实现线上API调用。
 
+3.封装高阶组件实现页面级路由鉴权。
+
+4.视图层使用 MATERIAL-UI 
 
 ## 项目收益
 
-## 项目架构
+从头到尾搭建了整个项目，踩了很多很多的坑，对服务端渲染的实现过程有较深刻的印象。包括 webpack、webpack dev server、开发模式下如何拿到 bundle、如何封装路由中间件、服务端路由跳转、服务端异步渲染、Store数据的同步...
+
+但是很多东西没有往深处挖，没有挖到原理性的东西，只是看文档或demo去使用。有些原理还是要挖的，以后还是会写博客来总结记录。
+
+## 开发模式架构图
+
+![](./snodeArchitecture.png)
+
+
+## 如何运行
+### 1. `yarn` 安装依赖
+### 2. `yarn run build` 打包构建
+### 3. `yarn run start` 运行 
+
+访问 `localhost` 即可，server 运行在80端口
 
 ## 目录结构
 ```js
@@ -68,14 +85,6 @@
 
 ```
 
-## 如何运行
-
-1.安装依赖 yarn
-2.打包
-
-
-
-
 ## 开发过程一些记录
 
 ### 1.开发模式和生产模式下「实时服务端渲染」？
@@ -95,7 +104,7 @@
 
 server.ejs 在webpack dev server中，是在内存中的，我们无法获取 --> 通过http请求，获取到 dev server 上的 ejs模板（http://localhost:8888/public/server.ejs）；
 
-2.怎么拿bundle？（server/util/dev.static.js Line 49~85）
+2.怎么拿 bundle？（server/util/dev.static.js Line 49~85）
 
 * 获取 webpack 的 server 配置文件，启动一个webpack的编译器，可以监听（watch） entry 下的文件是否有变化，一旦变化会重新打包。
 
@@ -103,15 +112,15 @@ server.ejs 在webpack dev server中，是在内存中的，我们无法获取 --
 
 * 通过 memory-fs 在内存中读取到对应的 jsbundle（读取出来的结果是字符串,要转成 module 才可以使用）
 
-* 
-
 * 将两者结合起来，返回最终内容。
 
 #### 问题：服务端启动后，发现并**没有**请求到对应的 js，而只有 html。
+
 webpack dev server 模式下，静态资源都在内存中，因此我们通过（http-proxy-middleware）代理转发获取 dev server 路径下的资源。
+
 ```js
 // 将 /public 的请求 代理到 webpack dev server 启动的服务上
-// http://localhost:3001/public/xxxx.js  -> http://localhost:8888/public/xxxx.js
+// http://localhost:80/public/xxxx.js  -> http://localhost:8888/public/xxxx.js
   app.use(
     "/public",
     proxy({
@@ -372,6 +381,8 @@ const html = ejs.render(template, {
 });
 ....
 ```
+
+
 
 
 

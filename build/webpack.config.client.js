@@ -72,7 +72,7 @@ if (isDev) {
     },
     // 客户端请求代理到服务端
     proxy: {
-      "/api": "http://localhost:3001"
+      "/api": "http://localhost:80"
     }
   };
   // HMR

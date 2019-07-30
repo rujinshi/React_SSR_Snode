@@ -1,18 +1,18 @@
-const serialize = require("serialize-javascript");
-const ejs = require("ejs");
+const serialize = require('serialize-javascript');
+const ejs = require('ejs');
 // const bootstrapper = require("react-async-bootstrapper");
-const asyncBootstrap = require("react-async-bootstrapper").default;
+const asyncBootstrap = require('react-async-bootstrapper').default;
 
-const ReactSSR = require("react-dom/server");
-const Helmet = require("react-helmet").default;
+const ReactSSR = require('react-dom/server');
+const Helmet = require('react-helmet').default;
 
-const SheetsRegistry = require("react-jss").SheetsRegistry;
-const create = require("jss").create;
-const preset = require("jss-preset-default").default;
-const createMuiTheme = require("@material-ui/core/styles").createMuiTheme;
-const createGenerateClassName = require("@material-ui/core/styles/createGenerateClassName")
+const SheetsRegistry = require('react-jss').SheetsRegistry;
+const create = require('jss').create;
+const preset = require('jss-preset-default').default;
+const createMuiTheme = require('@material-ui/core/styles').createMuiTheme;
+const createGenerateClassName = require('@material-ui/core/styles/createGenerateClassName')
   .default;
-const colors = require("@material-ui/core/colors");
+const colors = require('@material-ui/core/colors');
 
 const getStoreState = stores => {
   return Object.keys(stores).reduce((result, storeName) => {
@@ -30,7 +30,7 @@ module.exports = (bundle, template, req, res) => {
     const routerContext = {};
     const stores = createStoreMap();
 
-    console.log("当前user是：", user);
+    console.log('当前user是：', user);
     // 如果在服务端判断已有登录信息 直接改变state里的值
     if (user) {
       stores.appState.user.isLogin = true;
@@ -44,7 +44,7 @@ module.exports = (bundle, template, req, res) => {
       palette: {
         primary: colors.lightBlue,
         accent: colors.pink,
-        type: "light"
+        type: 'light'
       }
     });
 
@@ -59,10 +59,10 @@ module.exports = (bundle, template, req, res) => {
     );
     asyncBootstrap(app)
       .then(() => {
-        console.log("服务端的bootstrap开始运行");
+        console.log('服务端的bootstrap开始运行');
         // 在服务端渲染做重定向
         if (routerContext.url) {
-          res.status(302).setHeader("Location", routerContext.url);
+          res.status(302).setHeader('Location', routerContext.url);
           res.end();
           return;
         }
@@ -82,7 +82,6 @@ module.exports = (bundle, template, req, res) => {
           link: helmet.link.toString(),
           materialCss: sheetRegistry.toString()
         });
-        console.log("服务端渲染后的 content:" + content);
         res.send(html);
         resolve();
       })
