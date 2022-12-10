@@ -22,7 +22,7 @@
 		"compile-ejs-loader": "^0.0.2",
 		"dateformat": "^3.0.3",
 		"ejs": "^2.6.2",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"express-session": "^1.16.2",
 		"jss": "^9.8.7",
 		"jss-preset-default": "^4.5.0",
